@@ -544,6 +544,10 @@ body.menu-expanded button path {
   border-radius: 0 15rem;
 }
 
+ #contact .col-a a {
+    text-decoration: none;
+    color: black;
+  }
 /*==================CONTACT==============================*/
 
 #contact {
