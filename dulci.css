@@ -1,0 +1,920 @@
+/*======GERAL==========================*/
+
+* {
+  margin: 0;
+  box-sizing: border-box; /*Faz o cálculo do tamanho da caixa a partir da borda, sem deixar maior.*/
+  padding: 0;
+}
+
+:root {
+  /*
+  --hue: 170;
+  --primary-color: hsl(var(--hue), 100%, 26%);
+  --headline: hsl(210, 11%, 15%);
+  --paragraph: hsl(210, 9%, 31%);
+  --brand-beige: hsl(39, 100%, 97%);
+  --brand-ligth: hsl(148, 23%, 89%);
+  --nav-heigth: 7.2rem;
+  --bg-ligth: hsl(180, 14%, 97%);
+  --brand-dark: hsl(var(--hue), 100%, 14%);
+
+  font-size: 62.6%; Cada 1 rem nesse número Equivale a 10 pixels, feito na regra de 3*/
+  --hue: 5;
+  --primary-color: hsl(var(--hue), 25%, 50%);
+  --headline: hsl(210, 11%, 15%);
+  --paragraph: hsl(210, 9%, 31%);
+  --brand-beige: hsl(39, 100%, 97%);
+  --brand-ligth: hsl(calc(var(--hue) - 22), 23%, 89%);
+  --brand-green-ligth2: hsl(calc(var(--hue) + 10), 14%, 97%);
+
+  --nav-heigth: 7.2rem;
+  --bg-ligth: hsl(180, 14%, 97%);
+  --brand-dark: hsl(var(--hue), 100%, 14%);
+
+  font-size: 62.6%;
+}
+
+html {
+  scroll-behavior: smooth; /*Serve para suavizar a scrolada de botão*/
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  text-align: center;
+  font-family: 'DM sans';
+  font-size: 1.6rem; /*Equivale a 16 pixels*/
+  overflow: overlay;
+  background-color: var(--bg-ligth);
+}
+
+.wrapper {
+  width: min(50rem, 100%); /*Responsividade*/
+  margin-inline: auto;
+  padding-inline: 2.4rem;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%; /*Padroniza o tamanho que as imagens podem usar, sem dar overflow- transbordamento de imagem*/
+}
+
+section {
+  padding-block: 10rem;
+}
+
+section header h4 {
+  font-size: 1rem;
+  font-size: 1.4rem; /* Equivale a 14 pixels*/
+  color: var(--primary-color);
+  margin-bottom: 1.6rem;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+section header h2 {
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 3.9rem;
+  color: var(--headline);
+}
+
+section header h1 {
+  font-size: 3.4rem;
+  color: var(--headline);
+  line-height: 130%; /*Espaçamento entre linhas*/
+  margin-bottom: 2.4rem;
+}
+
+section .content p {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 150%;
+  color: var(--paragraph);
+}
+
+.button {
+  background: var(--primary-color);
+  border: none;
+  border-radius: 4rem;
+
+  margin-bottom: 6rem;
+  /*
+  height: 5.2rem;
+  width: 26.3rem;
+  */
+  padding: 1.6rem 3.2rem;
+  width: fit-content; /*Largura se adapta ao conteúdo*/
+  left: 5.6rem;
+  top: 37.4rem;
+  border-radius: 40px;
+  padding: 1.6rem, 3.2rem, 1.6rem, 3.2rem;
+
+  color: white;
+  text-transform: uppercase; /*Caixa alta de texto*/
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  display: flex; /*Usa antes de centralizar um item dentro de uma caixa*/
+  align-items: center; /*Usado após o display flex*/
+  justify-content: center; /*Centraliza o item*/
+  gap: 1.6rem; /*Espaçamento entre os elementos*/
+
+  transition: background 200ms;
+}
+
+.button:hover {
+  /*Suavização é informada pela transition acima*/
+  background-color: var(--brand-dark);
+}
+
+/*======CUSTOM COLORS==========*/
+#services .card circle {
+  fill: var(--brand-ligth);
+}
+
+#navigation .logo path[fill*='#00856F'],
+#backToTopButton circle {
+  fill: var(--primary-color);
+}
+
+button.open-menu path[stroke*='#00856F'],
+#contact li path {
+  stroke: var(--primary-color);
+}
+
+#navigation.scroll button.open-menu path[stroke*='#00856F'] {
+  stroke: white;
+}
+
+body.menu-expanded #navigation .logo path,
+#navigation.scroll .logo path[fill*='#00856F'] {
+  fill: white;
+}
+
+/*==========NAVIGATION===================*/
+
+nav {
+  display: flex;
+
+  height: var(--nav-heigth);
+
+  position: fixed;
+  top: 0;
+  /*left: 50%;
+  transform: translateX(-50%);*/
+  width: 100vw;
+  z-index: 100;
+}
+
+nav .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav#navigation a.logo {
+  margin-top: -5.5rem;
+  border-radius: 5rem;
+  width: 7rem;
+  height: 1.8rem;
+}
+
+nav.scroll {
+  background: var(--primary-color);
+}
+
+nav.scroll .logo path {
+  fill: white; /*Encontra o fill da cor no path do svg*/
+}
+
+nav.scroll button path {
+  stroke: white; /*Encontra o stroke da cor no path do svg*/
+}
+
+nav button {
+  background: none;
+  border: none;
+  cursor: pointer; /*Símbolo da mão por cima*/
+}
+
+nav .menu,
+nav .close-menu {
+  position: fixed;
+}
+
+/*==========MENU-EXPANDED===================*/
+body.menu-expanded {
+  overflow: hidden;
+}
+
+body.menu-expanded > :not(nav) {
+  visibility: hidden;
+}
+
+.menu,
+.close-menu,
+body.menu-expanded .open-menu {
+  opacity: 0; /*Some o elemento na tela, porém continua clicável*/
+  visibility: hidden; /*Escondido*/
+}
+
+body.menu-expanded .menu,
+body.menu-expanded .close-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu {
+  transform: translateX(100%); /*Efeito para menu, junto com transition*/
+}
+
+body.menu-expanded .menu {
+  /*position: fixed;*/
+  top: 0;
+  left: 0;
+  background: var(--primary-color);
+  width: 100vw;
+  height: 100vh;
+  padding-top: var(--nav-heigth);
+  transition: transform 350ms; /*Efeito para suavizar abertura de tela*/
+  transform: translateX(0);
+}
+
+body.menu-expanded nav {
+  /* position: relative;*/
+}
+
+.menu ul:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  gap: 4.8rem;
+
+  margin-top: 6rem;
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 3.1rem;
+}
+
+.menu ul li a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.menu .button {
+  background: #ffffff;
+  border-radius: 4rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.3rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--primary-color);
+  display: inline-block;
+  padding: 1.6rem 3.2rem;
+  margin-top: 4.8rem;
+  margin-bottom: 8rem;
+  margin-inline: auto;
+}
+
+.menu .button:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transition: background 200ms;
+  filter: opacity(0.8);
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.2rem;
+}
+
+body.menu-expanded .logo,
+body.menu-expanded nav button {
+  position: relative;
+  z-index: 100;
+}
+
+body.menu-expanded .logo path {
+  fill: white;
+}
+
+body.menu-expanded button path {
+  stroke: white;
+}
+
+/*=========HOME=================================================*/
+
+#home {
+  padding-block: 0;
+  padding-top: calc(
+    4.1rem + var(--nav-heigth)
+  ); /*Calcula as margens entre elas*/
+}
+
+#home::before {
+  /*Cria uma marcação no html, antes de algum conteúdo*/
+  content: '';
+  width: 100%; /*vw serve para usar toda tela conforme mexe*/
+  height: calc(76% + var(--nav-heigth));
+  background-color: var(--brand-ligth);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /*Deixa a cor atrás de um conteúdo, como de fundo*/
+}
+
+#home h4 {
+  /* Códigos foram padronizados para Section
+  font-size: 1rem; 
+  font-size: 1.4rem;  Equivale a 14 pixels
+  color: var(--primary-color);
+  margin-bottom: 1.6rem;*/
+}
+
+#home h1 {
+  /* Códigos foram padronizados para Section
+  font-size: 3.4rem;
+  color: var(--headline);
+  line-height: 130%; Espaçamento entre linhas
+  margin-bottom: 2.4rem;*/
+}
+
+#home p {
+  font-size: 1.8rem;
+  color: var(--paragraph);
+  line-height: 150%;
+  margin-bottom: 3.2rem;
+}
+
+#home .button {
+  /* 
+    FOI REPASSADO PARA O .BUTTON NAS 
+    CONFIGURAÇÕES GERAIS.
+ background: var(--primary-color);
+  border: none;
+  border-radius: 4rem;
+
+  margin-bottom: 6rem;
+
+  height: 5.2rem;
+  width: 26.3rem;
+
+  left: 5.6rem;
+  top: 37.4rem;
+  border-radius: 40px;
+  padding: 1.6rem, 3.2rem, 1.6rem, 3.2rem;
+
+  color: white;
+  text-transform: uppercase; /*Caixa alta de texto
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  display: flex; /*Usa antes de centralizar um item dentro de uma caixa
+  align-items: center; /*Usado após o display flex
+  justify-content: center; /*Centraliza o item
+  gap: 1.6rem; /*Espaçamento entre os elementos
+
+  margin-inline: auto; */
+  margin-inline: auto;
+}
+
+#home img {
+  /*Marcações utilizadas para movimentar a imagem dentro das suas margens, e colar no div quando ouver espaçamento entre elas*/
+  width: 26.1rem;
+  display: block;
+  margin-inline: auto;
+  object-position: 0 0.5rem; /*Eixo x e eixo y*/
+}
+
+#home .stats {
+  width: 100%; /*Responsividade*/
+  padding-block: 4rem; /*Mexe no conteúdo referente a linha vertical*/
+  margin-inline: auto; /*Margem referente ao eixo x*/
+  background-color: var(--brand-beige);
+  border: 1px solid var(--brand-ligth);
+  border-radius: 0.6rem;
+  display: flex; /*Aloca os elementos em linha*/
+  flex-direction: column; /*Transforma o flex em colunas*/
+  justify-content: center; /*Alinha os elementos do flex ao centro*/
+  gap: 6rem; /*Separação entre os elementos, igual o word*/
+}
+
+#home .stat h3 {
+  font-size: 4.8rem;
+  color: var(--headline);
+  line-height: 130%;
+
+  margin-bottom: 0.4rem;
+}
+
+#home .stat p {
+  margin: 0;
+  color: var(--primary-color);
+
+  font-size: 1.6rem;
+  line-height: 150%;
+}
+
+/*==================SERVICES==============================*/
+
+#services header h4 {
+  /* Códigos foram padronizados para Section
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 150%;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 1.6rem;*/
+}
+
+#services header h2 {
+  /* Códigos foram padronizados para Section
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 3.9rem;
+  color: var(--headline);*/
+  margin-bottom: 6rem;
+}
+
+#services .cards {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+#services .card {
+  padding: 2.4rem;
+  text-align: left; /*Deixa os textos na esquerda*/
+  background: #ffffff;
+  border: 0.1rem solid var(--brand-ligth);
+  border-radius: 0.6rem;
+}
+
+#services .card h3 {
+  /*margin-top: 1.6rem;
+  margin-bottom: 1.6rem;*/
+  margin-block: 1.6rem;
+}
+
+#services .cards .card #produtos.ferreiro {
+  position: relative;
+  display: flex;
+  height: 40rem;
+  margin-top: -3rem;
+  margin-bottom: -9rem;
+  justify-content: center;
+}
+
+#services .cards .card #produtos.felicidade {
+  position: relative;
+  display: flex;
+  height: 39rem;
+  margin-top: -5rem;
+  margin-bottom: -9rem;
+  justify-content: center;
+}
+
+#services .cards .card #produtos.ovos {
+  position: relative;
+  display: flex;
+  height: 40rem;
+  margin-top: -3rem;
+  margin-bottom: -9rem;
+  justify-content: center;
+}
+
+#services .cards .card #produtos.cupCake {
+  position: relative;
+  display: flex;
+  height: 40rem;
+  margin-top: -3rem;
+  margin-bottom: -9rem;
+  justify-content: center;
+}
+
+#services .cards .card #produtos.boloPote {
+  position: relative;
+  display: flex;
+  height: 40rem;
+  margin-top: -3rem;
+  margin-bottom: -9rem;
+  justify-content: center;
+}
+
+#services .cards .card #produtos.trufa {
+  position: relative;
+  display: flex;
+  height: 40rem;
+  margin-top: -1rem;
+  margin-bottom: -9rem;
+  justify-content: center;
+}
+
+/*==================ABOUT==============================*/
+#about {
+  text-align: left;
+  background-color: var(--brand-beige);
+}
+
+#about header h2 {
+  margin-bottom: 2.4rem;
+}
+
+#about .content p {
+  margin-top: 2.4rem;
+  margin-bottom: 6rem;
+}
+
+#about .col-b img {
+  border-radius: 0 15rem;
+}
+
+/*==================CONTACT==============================*/
+
+#contact {
+  text-align: left;
+}
+
+#contact header {
+  margin-bottom: 3.2rem;
+}
+
+#contact ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: 3.2rem;
+}
+
+#contact ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+#contact .col-b img {
+  width: 35rem;
+  border-radius: 0 15rem 15rem 15rem;
+  opacity: 0.7;
+}
+
+/*==================FOOTER==============================*/
+
+footer {
+  background-color: var(--primary-color);
+  padding-block: 6rem;
+  text-align: left;
+  color: #ffffff;
+}
+
+footer .logo {
+  display: inline-block;
+  margin-bottom: -44rem;
+  margin-top: -6rem;
+  margin-left: -6rem;
+  width: 23.6rem;
+  height: 3.1rem;
+}
+
+footer .logo path {
+  fill: white;
+}
+
+footer p {
+  color: var(--brand-beige);
+  line-height: 2; /*Distância entre linhas*/
+  margin-bottom: 1.2rem;
+}
+
+footer p svg {
+  margin-bottom: -0.9rem;
+}
+
+footer .social-links {
+  justify-content: flex-start;
+}
+
+/*BACK TO TOP*/
+
+#backToTopButton {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 2.5rem;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+  transition: 200ms;
+}
+
+#backToTopButton.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/*==================RESPONSIVO==============================*/
+
+@media (min-width: 1024px) {
+  /*=======GERAL======================*/
+
+  body {
+    overflow: auto; /*Cálculo não fica sobre posto pela barra*/
+  }
+
+  .wrapper {
+    width: min(112rem, 100%); /*Cresce até o 1120px*/
+    display: grid;
+  }
+
+  .col-a {
+    grid-area: A;
+  }
+
+  .col-b {
+    grid-area: B;
+  }
+
+  section {
+    padding-block: 16rem;
+  }
+
+  section header h2 {
+    font-size: 4rem;
+    line-height: 5.2rem;
+  }
+
+  /*=======NAVIGATION======================*/
+
+  /* Reset */
+
+  nav#navigation .wrapper * {
+    margin: 0;
+    padding: 0;
+    visibility: initial;
+    display: initial;
+    opacity: initial;
+    flex-direction: initial;
+    position: initial;
+    font-size: initial;
+    transform: initial;
+    color: initial;
+    background-color: initial;
+    font-weight: initial;
+  }
+
+  nav#navigation .close-menu,
+  nav#navigation .open-menu,
+  nav#navigation .social-links {
+    display: none;
+  }
+
+  nav#navigation .menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+  }
+
+  nav#navigation .menu ul:nth-child(1) {
+    display: flex;
+    gap: 3.2rem;
+  }
+
+  nav#navigation .menu ul li a {
+    font-size: 16px;
+    line-height: 21px;
+    color: var(--primary-color);
+    opacity: 0.7;
+    line-height: 2.1rem;
+  }
+
+  nav#navigation .menu a.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2.4rem;
+
+    border: 1px solid var(--primary-color);
+    border-radius: 4rem;
+    font-weight: 700;
+
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    text-transform: uppercase;
+    color: var(--primary-color);
+  }
+  nav#navigation .menu a.button.active,
+  nav#navigation .menu a.button:hover {
+    background-color: var(--primary-color);
+    transition: background-color 0.3s;
+    color: var(--brand-green-ligth2);
+    opacity: 0.8;
+  }
+
+  nav#navigation.scroll .menu ul li a {
+    color: var(--brand-green-ligth2);
+    opacity: 0.6;
+  }
+
+  nav#navigation.scroll .menu a.button {
+    border-color: white;
+    color: white;
+  }
+
+  nav#navigation .menu li a {
+    transition: opacity 0.8s;
+  }
+
+  /*Edição pra mudar o estilo quando mouse passa por cima*/
+  nav#navigation .menu li a.active,
+  nav#navigation .menu li a:hover {
+    opacity: 1;
+    font-weight: 700;
+  }
+  /*Efeito de linha embaixo do menu com mouse por cima*/
+  nav#navigation .menu li a:after {
+    content: '';
+    width: 0%;
+    height: 0.3rem;
+    background-color: var(--primary-color);
+    display: block;
+    position: relative; /*Para liberar a bottom*/
+    bottom: -2rem;
+    transition: width 0.3s;
+  }
+
+  nav#navigation.scroll .menu li a:after {
+    background-color: var(--brand-green-ligth2);
+    font-weight: 700;
+  }
+
+  /*Quando o a tiver hover, procura o elemento after*/
+  nav#navigation .menu li a.active::after,
+  nav#navigation .menu li a:hover::after {
+    padding-inline: 0.8rem;
+    width: 100%;
+    left: -0.6rem;
+  }
+  nav#navigation.scroll .menu li a.active,
+  nav#navigation.scroll .menu li a:hover {
+    transition: width 0.3s;
+    opacity: 1;
+  }
+  nav#navigation.scroll .menu a.button.active,
+  nav#navigation.scroll .menu a.button:hover {
+    background-color: var(--primary-color);
+    filter: brightness(1.3);
+    border: none;
+    transition: filter 0.3s;
+  }
+
+  /*======= HOME ======================*/
+  #home::before {
+    height: calc(96% - var(--nav-heigth));
+  }
+
+  #home {
+    padding-top: var(--nav-heigth);
+  }
+
+  #home .wrapper {
+    grid-template-columns: 60.5rem 1fr; /*Tamanho das colunas*/
+    grid-template-areas:
+      'A B'
+      'C C'; /*Usado para definir as áreas da coluna*/
+  }
+
+  #home .col-a {
+    text-align: left;
+    align-self: center; /*Alinhamento referente a própria coluna*/
+  }
+
+  #home h1 {
+    font-size: 5.2rem;
+  }
+
+  #home .content p {
+    font-size: 1.8rem;
+  }
+
+  #home .stats {
+    grid-area: C;
+    flex-direction: row; /*Ajeitar os itens lado a lado*/
+    padding: 6rem;
+    gap: 0;
+  }
+
+  #home .stats .stat + .stat {
+    border-left: 1px solid var(--primary-color);
+  }
+
+  #home .stats .stat {
+    flex: 1; /*Usado para preenchimento e deixa as larguras entre as caixas iguais*/
+  }
+
+  #home .button {
+    margin: 0;
+  }
+
+  #home img {
+    width: 42rem;
+  }
+
+  /*=======SERVICES======================*/
+
+  #services h2 {
+    width: 49rem;
+    margin-inline: auto;
+  }
+
+  #services .cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4rem;
+  }
+
+  #services .card {
+    width: 30%;
+    flex-grow: 1; /*Preenche o espaço sobrando da div*/
+  }
+
+  /*=======ABOUT======================*/
+  #about .wrapper {
+    grid-template-columns: 48rem 1fr;
+    grid-template-areas: 'B A';
+    gap: 6.7rem;
+  }
+
+  #about .col-a {
+    align-self: center;
+  }
+
+  #about .content p {
+    margin-bottom: 0%;
+  }
+
+  #about .col-b img {
+    border-radius: 0 15rem;
+  }
+
+  #contact .col-a a {
+    text-decoration: none;
+    color: black;
+  }
+
+  /*=======CONTACT======================*/
+
+  #contact .wrapper {
+    grid-template-columns: 1fr 57.5rem;
+    grid-template-areas: 'A B';
+  }
+
+  #contact h2 {
+    width: 40.4rem;
+  }
+
+  #contact .col-b img {
+    width: 35rem;
+    border-radius: 0 0rem 0rem 15rem;
+    opacity: 0.7;
+  }
+
+  /*=======FOOTER======================*/
+  footer {
+    padding-block: 2rem;
+  }
+
+  footer .wrapper {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'A B';
+  }
+
+  footer p {
+    margin-bottom: 0;
+  }
+
+  footer .col-a {
+    align-self: center;
+  }
+
+  footer .col-b {
+    align-items: center;
+    justify-self: flex-end;
+  }
+}
